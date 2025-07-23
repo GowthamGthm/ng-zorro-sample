@@ -1,1 +1,63 @@
-<p>welcome works!</p>
+<div class="card-container">
+  <nz-tabset nzType="card" nzCentered="true">
+    <nz-tab [nzTitle]="'Tab 1'">
+      <p>Content of Tab Pane 1</p>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Tab 2'">
+      <p>Content of Tab Pane 2</p>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Tab 3'">
+      <nz-collapse nzAccordion>
+        <nz-collapse-panel
+          [nzHeader]="'This is Acc 1'"
+          [nzActive]="activePanelIndex === 1"
+          (nzActiveChange)="onPanelChange($event, 1)"
+        >
+          <app-table1></app-table1>
+        </nz-collapse-panel>
+        <nz-collapse-panel
+          [nzHeader]="'This is Acc 2'"
+          [nzActive]="activePanelIndex === 2"
+          (nzActiveChange)="onPanelChange($event, 2)"
+        >
+          <app-table2></app-table2>
+        </nz-collapse-panel>
+        <nz-collapse-panel
+          [nzHeader]="'This is Acc 3'"
+          [nzActive]="activePanelIndex === 3"
+          (nzActiveChange)="onPanelChange($event, 3)"
+        >
+          <p>Acc 3</p>
+        </nz-collapse-panel>
+        <nz-collapse-panel
+          [nzHeader]="'This is Acc 4'"
+          [nzActive]="activePanelIndex === 4"
+          (nzActiveChange)="onPanelChange($event, 4)"
+        >
+          <p>Acc 4</p>
+        </nz-collapse-panel>
+        <nz-collapse-panel
+          [nzHeader]="'This is Acc 5'"
+          [nzActive]="activePanelIndex === 5"
+          (nzActiveChange)="onPanelChange($event, 5)"
+        >
+          <p>Acc 5</p>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Tab 4'">
+      <p>Content of Tab Pane 4</p>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Tab 5'">
+      <p>Content of Tab Pane 5</p>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Tab 6'">
+      <p>Content of Tab Pane 6</p>
+    </nz-tab>
+  </nz-tabset>
+</div>

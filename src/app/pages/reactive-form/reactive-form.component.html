@@ -1,0 +1,43 @@
+<form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="vertical">
+
+  <!-- Username -->
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true">Username</nz-form-label>
+    <nz-form-control [nzValidateStatus]="validateForm.controls.username">
+      <input nz-input formControlName="username"/>
+      <app-form-error
+        [control]="validateForm.controls.username"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Email -->
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true">Email</nz-form-label>
+    <nz-form-control [nzValidateStatus]="validateForm.controls.email">
+      <input nz-input formControlName="email"/>
+      <app-form-error
+        [control]="validateForm.controls.email"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Password -->
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true">Password</nz-form-label>
+    <nz-form-control [nzValidateStatus]="validateForm.controls.password">
+      <input nz-input type="text" formControlName="password"/>
+      <app-form-error
+        [control]="validateForm.controls.password"
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Submit -->
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

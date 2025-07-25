@@ -1,6 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
-  AbstractControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators
+  AbstractControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
 } from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -11,6 +16,7 @@ import {NzFormModule, NzFormTooltipIcon} from 'ng-zorro-antd/form';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzSelectModule} from 'ng-zorro-antd/select';
 import {AppFormErrorValidationComponent} from '@app/pages/table2/app-form-error-validation.component';
+import {FormValidationUtils} from '@app/shared/form-validation.utils';
 
 @Component({
   selector: 'app-table2',
@@ -21,10 +27,23 @@ import {AppFormErrorValidationComponent} from '@app/pages/table2/app-form-error-
 })
 export class Table2Component implements OnInit, OnDestroy {
 
+  readonly  DEFAULT_VALUE_FOR_FORM : any = {
+    email: '',
+    password: '',
+    checkPassword: '',
+    nickname: '',
+    phoneNumberPrefix: '+86',
+    phoneNumber: '',
+    website: '',
+    captcha: '',
+    agree: false
+  };
+
   validateForm!: FormGroup;
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle', theme: 'twotone'
   };
+
   private destroy$ = new Subject<void>();
 
   constructor(private fb: NonNullableFormBuilder) {
@@ -59,11 +78,7 @@ export class Table2Component implements OnInit, OnDestroy {
   submitForm(): void {
     console.log("submit --> before validation")
 
-    if (this.validateForm.invalid) {
-      Object.values(this.validateForm.controls).forEach(control => {
-        control.markAsTouched();
-        control.updateValueAndValidity();
-      });
+    if(FormValidationUtils.checkIfFormInValid(this.validateForm)) {
       return;
     }
 
@@ -84,12 +99,7 @@ export class Table2Component implements OnInit, OnDestroy {
   }
 
   resetForm(): void {
-    this.validateForm.reset();
-    Object.keys(this.validateForm.controls).forEach(key => {
-      this.validateForm.controls[key].setErrors(null);
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].markAsUntouched();
-    });
+    FormValidationUtils.resetFormCompletely(this.validateForm , this.DEFAULT_VALUE_FOR_FORM);
   }
 
 }

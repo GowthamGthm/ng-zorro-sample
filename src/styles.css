@@ -1,7 +1,27 @@
-/* .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #ff0000;
-  text-shadow: 0 0 0.25px #ff0000;
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-15 {
+  margin-top: 15px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mt-25 {
+  margin-top: 25px !important;
 }
 
 
- */
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+
+.center-ab {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -8,12 +8,12 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 
 // TO DISABLE LOGS THROUGH OUT THE APPLICATION
-if (true) {
-  console.log = () => {};
-  console.debug = () => {};
-  console.info = () => {};
-  console.warn = () => {};
-}
+// if (false) {
+//   console.log = () => {};
+//   console.debug = () => {};
+//   console.info = () => {};
+//   console.warn = () => {};
+// }
 
 bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)

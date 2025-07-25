@@ -8,7 +8,7 @@ import {
   Validators
 } from '@angular/forms';
 import {
-  NzFormControlComponent,
+  NzFormControlComponent, NzFormDirective,
   NzFormItemComponent,
   NzFormLabelComponent
 } from 'ng-zorro-antd/form';
@@ -16,6 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import {FormErrorComponent} from '@app/shared/components/app-form-error.component';
 import {passwordPatternValidator} from '@app/shared/validators/password-character.validator';
+import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
 
 
 @Component({
@@ -29,7 +30,10 @@ import {passwordPatternValidator} from '@app/shared/validators/password-characte
     NzFormControlComponent,
     NzInputModule,
     NzButtonModule,
-    FormErrorComponent
+    FormErrorComponent,
+    NzFormDirective,
+    NzColDirective,
+    NzRowDirective
   ],
   templateUrl: './reactive-form.component.html'
 })
@@ -54,15 +58,7 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    // this.submitted= true;
 
-    // if (this.validateForm.invalid) {
-    //   Object.values(this.validateForm.controls).forEach(control => {
-    //     control.markAsDirty();
-    //     control.updateValueAndValidity();
-    //   });
-    //   return;
-    // }
 
     if (this.validateForm.invalid) {
       this.validateForm.markAllAsTouched();

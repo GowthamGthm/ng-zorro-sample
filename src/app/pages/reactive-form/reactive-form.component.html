@@ -1,42 +1,46 @@
-<form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="vertical">
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
   <!-- Username -->
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Username</nz-form-label>
-    <nz-form-control [nzValidateStatus]="validateForm.controls.username">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">Username</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.username">
       <input nz-input formControlName="username"/>
       <app-form-error
         [control]="validateForm.controls.username"
       />
     </nz-form-control>
+
   </nz-form-item>
 
   <!-- Email -->
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Email</nz-form-label>
-    <nz-form-control [nzValidateStatus]="validateForm.controls.email">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Email</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.email">
       <input nz-input formControlName="email"/>
       <app-form-error
         [control]="validateForm.controls.email"
       />
     </nz-form-control>
+
   </nz-form-item>
 
   <!-- Password -->
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Password</nz-form-label>
-    <nz-form-control [nzValidateStatus]="validateForm.controls.password">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Password</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.password">
       <input nz-input type="text" formControlName="password"/>
       <app-form-error
         [control]="validateForm.controls.password"
       />
     </nz-form-control>
+
   </nz-form-item>
 
+
   <!-- Submit -->
-  <nz-form-item>
-    <nz-form-control>
-      <button nz-button nzType="primary">Submit</button>
+  <nz-form-item class="register-area">
+    <nz-form-control [nzSm]="14" [nzXs]="24" [nzOffset]="6">
+      <button nz-button nzType="primary" class="mt-30">Submit</button>
     </nz-form-control>
   </nz-form-item>
 

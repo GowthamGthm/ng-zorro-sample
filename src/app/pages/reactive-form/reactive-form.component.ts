@@ -16,7 +16,7 @@ import {NzSelectModule} from 'ng-zorro-antd/select';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {FormValidationUtils} from '@app/shared/form-validation.utils';
-import {userNameValidator} from '@app/shared/validators/password-character.validator';
+import {userNameValidator} from '@app/shared/validators/form.validator';
 
 
 @Component({
@@ -65,11 +65,19 @@ export class ReactiveFormComponent implements OnInit {
       agree: this.fb.control(false)
     });
 
+    // Set the confirm password validator safely AFTER form is created
+    this.validateForm.get('checkPassword')?.setValidators([
+      Validators.required,
+      this.confirmationValidator.bind(this)  // bind to access `this.validateForm`
+    ]);
+    this.validateForm.get('checkPassword')?.updateValueAndValidity();
 
-    this.validateForm.controls['password'].valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.validateForm.controls['checkPassword'].updateValueAndValidity();
-    });
-
+    //  Keep password-checkPassword sync
+    this.validateForm.get('password')?.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.validateForm.get('checkPassword')?.updateValueAndValidity();
+      });
   }
 
   ngOnDestroy(): void {
@@ -94,7 +102,7 @@ export class ReactiveFormComponent implements OnInit {
     } else if (control.value !== this.validateForm.controls['password'].value) {
       return {confirm: true, error: true};
     }
-    return {};
+    return null;
   }
 
   getCaptcha(e: MouseEvent): void {

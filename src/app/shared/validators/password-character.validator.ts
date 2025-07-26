@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
-export function passwordPatternValidator(control: AbstractControl): ValidationErrors | null {
+export function userNameValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
 
   if (!value) return null;
@@ -9,6 +9,6 @@ export function passwordPatternValidator(control: AbstractControl): ValidationEr
 
   return pattern.test(value)
     ? null
-    : { passwordPattern: true };
+    : { userName: true };
 
 }

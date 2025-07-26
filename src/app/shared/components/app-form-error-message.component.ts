@@ -3,7 +3,7 @@ import {AbstractControl} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 
 @Component({
-  selector: 'app-form-error-validation',
+  selector: 'app-form-error-msg',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -16,14 +16,15 @@ import {CommonModule} from '@angular/common';
     </ng-container>
   `
 })
-export class AppFormErrorValidationComponent implements OnInit {
+export class AppFormErrorMessageComponent implements OnInit {
 
 
   @Input() control!: AbstractControl | null;
 
   errorMap: { [key: string]: string } = {
     required: 'This field is required!',
-    email: 'Please input a valid email!'
+    email: 'Please input a valid email!',
+    userName: 'UserName should start with 4  characters and 4 numbers , max 8 characters  Ex: ABCD1234'
   };
 
   get errorKeys() {

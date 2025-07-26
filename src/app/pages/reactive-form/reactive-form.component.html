@@ -1,47 +1,144 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+<form (ngSubmit)="submitForm()" [formGroup]="validateForm" nz-form>
 
-  <!-- Username -->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="username">Username</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.username">
-      <input nz-input formControlName="username"/>
-      <app-form-error
-        [control]="validateForm.controls.username"
-      />
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="userName" nzRequired>UserName</nz-form-label>
+    <nz-form-control [nzErrorTip]="userNameErrorTpl" [nzSm]="14" [nzXs]="24">
+      <input formControlName="userName" id="userName"  nz-input autocomplete="off" name="custom_user"/>
+      <ng-template #userNameErrorTpl let-control>
+        <app-form-error-msg [control]="validateForm.controls['userName']"></app-form-error-msg>
+      </ng-template>
     </nz-form-control>
-
   </nz-form-item>
 
-  <!-- Email -->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Email</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.email">
-      <input nz-input formControlName="email"/>
-      <app-form-error
-        [control]="validateForm.controls.email"
-      />
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired>E-mail</nz-form-label>
+    <nz-form-control [nzErrorTip]="emailErrorTpl" [nzSm]="14" [nzXs]="24">
+      <input formControlName="email" id="email" nz-input/>
+      <ng-template #emailErrorTpl let-control>
+        <app-form-error-msg [control]="validateForm.controls['email']"></app-form-error-msg>
+      </ng-template>
     </nz-form-control>
-
   </nz-form-item>
 
-  <!-- Password -->
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Password</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls.password">
-      <input nz-input type="text" formControlName="password"/>
-      <app-form-error
-        [control]="validateForm.controls.password"
-      />
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+      <input formControlName="password" id="password" nz-input type="password"/>
     </nz-form-control>
+  </nz-form-item>
 
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+    <nz-form-control [nzErrorTip]="errorTpl" [nzSm]="14" [nzXs]="24">
+      <input formControlName="checkPassword" id="checkPassword" nz-input type="password"/>
+      <ng-template #errorTpl let-control>
+        @if (control.errors?.['required']) {
+          Please confirm your password!
+        }
+        @if (control.errors?.['confirm']) {
+          Two passwords that you enter is inconsistent!
+        }
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6"
+      [nzXs]="24"
+      nzFor="nickname"
+      nzRequired
+      nzTooltipTitle="What do you want other to call you"
+    >
+      <span>Nickname</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+      <input formControlName="nickname" id="nickname" nz-input/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+    <nz-form-control
+      [nzSm]="14"
+      [nzValidateStatus]="validateForm.controls['phoneNumber']"
+      [nzXs]="24"
+      nzErrorTip="Please input your phone number!"
+    >
+      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+        <ng-template #addOnBeforeTemplate>
+          <nz-select class="phone-select" formControlName="phoneNumberPrefix">
+            <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+            <nz-option nzLabel="+87" nzValue="+87"></nz-option>
+          </nz-select>
+        </ng-template>
+        <input formControlName="phoneNumber" id="'phoneNumber'" nz-input/>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
+      <input formControlName="website" id="website" nz-input placeholder="website"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6"
+      [nzTooltipIcon]="captchaTooltipIcon"
+      [nzXs]="24"
+      nzFor="captcha"
+      nzRequired
+      nzTooltipTitle="Please click 'Get captcha'"
+    >
+      Captcha
+    </nz-form-label>
+    <nz-form-control
+      [nzSm]="14"
+      [nzXs]="24"
+      nzErrorTip="Please input the captcha you got!"
+      nzExtra="We must make sure that your are a human."
+    >
+      <div [nzGutter]="8" nz-row>
+        <div [nzSpan]="12" nz-col>
+          <input formControlName="captcha" id="captcha" nz-input/>
+        </div>
+        <div [nzSpan]="12" nz-col>
+          <button (click)="getCaptcha($event)" nz-button>Get captcha</button>
+        </div>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="register-area" nz-row>
+    <nz-form-control [nzOffset]="6" [nzSpan]="14">
+      <label formControlName="agree" nz-checkbox>
+            <span>
+              I have read the
+              <a>agreement</a>
+            </span>
+      </label>
+    </nz-form-control>
   </nz-form-item>
 
 
-  <!-- Submit -->
-  <nz-form-item class="register-area">
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzOffset]="6">
-      <button nz-button nzType="primary" class="mt-30">Submit</button>
+
+
+
+  <nz-form-item class="register-area" nz-row>
+    <nz-form-control [nzOffset]="6" [nzSpan]="14">
+      <div nz-row nzJustify="start" nzGutter="30">
+        <div nz-col>
+          <button nz-button nzType="primary" type="submit">Register</button>
+        </div>
+        <div nz-col>
+          <button nz-button nzType="primary" type="button" (click)="resetForm()">Reset</button>
+        </div>
+      </div>
     </nz-form-control>
   </nz-form-item>
+
 
 </form>

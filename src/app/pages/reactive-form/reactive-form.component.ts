@@ -1,71 +1,108 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
+  AbstractControl,
   FormGroup,
-  FormsModule,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators
 } from '@angular/forms';
-import {
-  NzFormControlComponent, NzFormDirective,
-  NzFormItemComponent,
-  NzFormLabelComponent
-} from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import {FormErrorComponent} from '@app/shared/components/app-form-error.component';
-import {passwordPatternValidator} from '@app/shared/validators/password-character.validator';
-import {NzColDirective, NzRowDirective} from 'ng-zorro-antd/grid';
+import {NzFormModule, NzFormTooltipIcon} from 'ng-zorro-antd/form';
+import {NzInputModule} from 'ng-zorro-antd/input';
+import {NzButtonModule} from 'ng-zorro-antd/button';
+import {AppFormErrorMessageComponent} from '@app/shared/components/app-form-error-message.component';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
+import {NzSelectModule} from 'ng-zorro-antd/select';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {FormValidationUtils} from '@app/shared/form-validation.utils';
+import {userNameValidator} from '@app/shared/validators/password-character.validator';
 
 
 @Component({
   selector: 'app-reactive-form',
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NzFormItemComponent,
-    NzFormLabelComponent,
-    NzFormControlComponent,
-    NzInputModule,
-    NzButtonModule,
-    FormErrorComponent,
-    NzFormDirective,
-    NzColDirective,
-    NzRowDirective
-  ],
+  imports: [ReactiveFormsModule, NzButtonModule, NzCheckboxModule, NzFormModule, NzInputModule, NzSelectModule, AppFormErrorMessageComponent],
   templateUrl: './reactive-form.component.html'
 })
 export class ReactiveFormComponent implements OnInit {
 
-  // submitted = false;
+  readonly DEFAULT_VALUE_FOR_FORM: any = {
+    userName: '',
+    email: '',
+    password: '',
+    checkPassword: '',
+    nickname: '',
+    phoneNumberPrefix: '+86',
+    phoneNumber: '',
+    website: '',
+    captcha: '',
+    agree: false
+  };
 
-  validateForm!: FormGroup<{
-    username: FormControl<string | null>;
-    email: FormControl<string | null>;
-    password: FormControl<string | null>;
-  }>;
+  validateForm!: FormGroup;
+  captchaTooltipIcon: NzFormTooltipIcon = {
+    type: 'info-circle', theme: 'twotone'
+  };
 
-  constructor(private fb: FormBuilder) {}
+  private destroy$ = new Subject<void>();
+
+  constructor(private fb: NonNullableFormBuilder) {
+  }
 
   ngOnInit(): void {
+
     this.validateForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(8) , passwordPatternValidator ]]
+      userName: this.fb.control('', [Validators.required, userNameValidator]),
+      email: this.fb.control('', [Validators.email, Validators.required]),
+      password: this.fb.control('', [Validators.required]),
+      checkPassword: this.fb.control('', [Validators.required, this.confirmationValidator]),
+      nickname: this.fb.control('', [Validators.required]),
+      phoneNumberPrefix: this.fb.control<'+86' | '+87'>('+86'),
+      phoneNumber: this.fb.control('', [Validators.required]),
+      website: this.fb.control('', [Validators.required]),
+      captcha: this.fb.control('', [Validators.required]),
+      agree: this.fb.control(false)
     });
+
+
+    this.validateForm.controls['password'].valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.validateForm.controls['checkPassword'].updateValueAndValidity();
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   submitForm(): void {
+    console.log("submit --> before validation")
 
-
-    if (this.validateForm.invalid) {
-      this.validateForm.markAllAsTouched();
+    if (FormValidationUtils.checkIfFormInValid(this.validateForm)) {
+      console.log(this.validateForm);
       return;
     }
 
-    console.log('Form Submitted:', this.validateForm.value);
+    console.log('submit', this.validateForm);
+  }
+
+  confirmationValidator(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) {
+      return {required: true};
+    } else if (control.value !== this.validateForm.controls['password'].value) {
+      return {confirm: true, error: true};
+    }
+    return {};
+  }
+
+  getCaptcha(e: MouseEvent): void {
+    e.preventDefault();
+  }
+
+  resetForm(): void {
+    FormValidationUtils.resetFormCompletely(this.validateForm, this.DEFAULT_VALUE_FOR_FORM);
   }
 
 }

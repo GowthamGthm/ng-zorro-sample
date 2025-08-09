@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {NzIconModule} from 'ng-zorro-antd/icon';
+import {NzLayoutModule} from 'ng-zorro-antd/layout';
+import {NzMenuModule} from 'ng-zorro-antd/menu';
 
 @Component({
   selector: 'app-root',
@@ -54,14 +54,19 @@ export class AppComponent {
           link: '',
         },
         {
-          title: 'Premium Form',
-          link: '',
+          title: 'Form Validation with Template',
+          link: '/validation/reactive-with-template',
+        },
+        {
+          title: 'Form Validation without Template',
+          link: '/validation/reactive-without-template',
         },
       ],
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   getSelected(link: string): boolean {
     return this.router.url === link;

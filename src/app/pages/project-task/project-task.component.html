@@ -1,0 +1,154 @@
+<!--<div class="desktop-results">-->
+<!--  <div *ngIf="idAlreadyExists" style="color: #d6006e; font-weight: bold; text-align: left;">The selected Ids-->
+<!--    already Exists.-->
+<!--  </div>-->
+<!--  <div class="desktop-result-header">-->
+<!--    <span style="color: #e20074; ">Project Task List</span>-->
+<!--    <span>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Remove an entry from project tasks" (click)="dummy()" nz-tooltip>-->
+<!--        Remove-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Edit selected from DesktopTable" (click)="editTaskClicked()"-->
+<!--              nz-tooltip>-->
+<!--        Edit Task-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Download from DesktopTable" (click)="downloadCSV()" nz-tooltip>-->
+<!--        Download csv-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Create Task from DesktopTable" (click)="showProjectModal()"-->
+<!--              nz-tooltip>-->
+<!--        Create Task-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Delete Task from DesktopTable" (click)="markRowsForDelete()"-->
+<!--              nz-tooltip>-->
+<!--        Delete Task-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Undo Task from DesktopTable" (click)="undoDelete()" nz-tooltip>-->
+<!--        Undo Delete-->
+<!--      </button>-->
+
+<!--      <button class="button" *ngIf="permissions.includes('USERS') || permissions.includes('ADMIN')" nzType="primary"-->
+<!--              nzTooltipPlacement="top" nzTooltipTitle="Commited from DesktopTable" (click)="commitConfirmationDialog()"-->
+<!--              nz-tooltip>-->
+<!--        Commit-->
+<!--      </button>-->
+
+<!--    </span>-->
+<!--  </div>-->
+<!--  <div class="results-box-test">-->
+<!--    <ag-grid-angular #agGrid3 [gridOptions]="gridOptions" [class]="themeClass" [getRowStyle]="getRowStyle"-->
+<!--                     [rowData]="finalselectedRowsdata" [columnDefs]="colDefs" [pagination]="pagination"-->
+<!--                     [defaultColDef]="defaultColDef"-->
+<!--                     [rowSelection]="rowSelection" [enableCellTextSelection]="true" [copyHeadersToClipboard]="true"-->
+<!--                     [paginationPageSize]="paginationPageSize" [paginationPageSizeSelector]="paginationPageSizeSelector"-->
+<!--                     (paginationChanged)="onGridReady()" (selectionChanged)="onSelectionChanged('agGrid3')"-->
+<!--                     (gridReady)="onGridReady2($event)" style="width: 100%; height: 600px"-->
+<!--                     [suppressColumnVirtualisation]="true"/>-->
+<!--    <div class="copyRight-content">-->
+<!--      <p style="color: #d6006e;">&#xA9; 2025 T-Mobile USA, Inc</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<nz-modal [(nzVisible)]="showCreateProjectTaskModal"-->
+<!--          [nzTitle]="editClicked ? 'Edit Project Task' : 'Create Project Task'" [nzWidth]="900" [nzMaskClosable]="false"-->
+<!--          (nzOnCancel)="hideProjectModal()" [nzFooter]="null" [nzClosable]="true">-->
+<!--  <div *nzModalContent>-->
+<!--    <div>-->
+
+<!--      <div class="pad-10" *ngIf="editClicked">-->
+<!--        <button nz-button [nzSize]="size" nzType="dashed" *ngFor="let task of desktopSelectedRows"-->
+<!--                (click)="loadEditTaskValues(task)">-->
+<!--          {{ task?.activityDefShortDesc }}-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <nz-divider nzPlain nzText="" nzVariant="dashed"></nz-divider>-->
+
+
+<!--      <form nz-form [formGroup]="createProjectTaskForm" class="ant-advanced-search-form">-->
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">TaskName</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+<!--            <input nz-input placeholder="TaskName" formControlName="taskName" id="taskName"/>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">Description</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+<!--            <input nz-input placeholder="Description" formControlName="description" id="description"/>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">AssignGroup</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+<!--            &lt;!&ndash; <input nz-input placeholder="AssignGroup" formControlName="assignGroup" type="number" id="assignGroup" /> &ndash;&gt;-->
+<!--            <nz-select [nzDropdownStyle]="{ width: '200px' }" [style.width.px]="200" formControlName="assignGroup"-->
+<!--                       nzShowSearch-->
+<!--                       nzAllowClear nzPlaceHolder="Select a AssignGroup">-->
+<!--              <nz-option *ngFor="let group of groupList" [nzLabel]="group.groupName"-->
+<!--                         [nzValue]="group.groupId"></nz-option>-->
+<!--            </nz-select>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">DurationDays</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+<!--            <input nz-input placeholder="DurationDays" formControlName="durationDays" type="number" id="durationDays"/>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8" nzRequired>Date Created (MM-dd-yyyy)</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+
+<!--            <nz-date-picker placeholder="Created Date" formControlName="createdDate" [nzInput]="false"-->
+<!--                            [nzAllowClear]="false" [nzInputReadOnly]="true" [nzDisabled]="true" nzFormat="MM-dd-yyyy"-->
+<!--                            [nzShowtime]="false"></nz-date-picker>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">CreatedBy</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10" nzErrorTip="This field is required!">-->
+<!--            <input nz-input placeholder="CreatedBy" formControlName="createdBy" id="createdby" readonly/>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+
+<!--        <nz-form-item style="margin-bottom: 10px">-->
+<!--          <nz-form-label nzLabelAlign="left" nzRequired nzSpan="8">Notes</nz-form-label>-->
+<!--          <nz-form-control nzSpan="10">-->
+<!--            <input nz-input placeholder="Notes" formControlName="notes" id="notes"/>-->
+<!--          </nz-form-control>-->
+<!--        </nz-form-item>-->
+<!--      </form>-->
+<!--      <div nz-modal-footer="" class="ant-modal-footer ng-tns-c2116847144-3 ng-star-inserted"-->
+<!--           ng-reflect-modal-ref="[object Object]">-->
+
+<!--        <button nz-button nzType="primary" *ngIf="!editClicked" [disabled]="!this.createProjectTaskForm.valid"-->
+<!--                (click)="createProject()">Create-->
+<!--        </button>-->
+<!--        <button nz-button nzType="primary" *ngIf="editClicked" [disabled]="!this.createProjectTaskForm.valid"-->
+<!--                (click)="updateProject()">Update-->
+<!--        </button>-->
+<!--        <button nz-button nzType="primary" (click)="resetProjectForm()">Reset</button>-->
+<!--        <button nz-button nzType="primary" (click)="hideProjectModal()">Cancel</button>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nz-modal>-->

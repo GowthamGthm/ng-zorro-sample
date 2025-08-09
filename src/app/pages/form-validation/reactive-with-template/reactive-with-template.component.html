@@ -1,30 +1,37 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+    <nz-form-control [nzSm]="14" [nzXs]="24" >
       <input nz-input formControlName="email" id="email" />
+      <app-field-error  [form]="validateForm" fieldName="email" [fieldMessages]="fieldErrorMessages"></app-field-error>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+    <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input type="password" id="password" formControlName="password" />
+      <app-field-error  [form]="validateForm" fieldName="password" [fieldMessages]="fieldErrorMessages"></app-field-error>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+    <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-      <ng-template #errorTpl let-control>
-        @if (control.errors?.['required']) {
-          Please confirm your password!
-        }
-        @if (control.errors?.['confirm']) {
-          Two passwords that you enter is inconsistent!
-        }
-      </ng-template>
+      <app-field-error  [form]="validateForm" fieldName="checkPassword" [fieldMessages]="fieldErrorMessages"></app-field-error>
+<!--      <ng-template #errorTpl let-control>-->
+<!--        @if (control.errors?.['required']) {-->
+<!--          Please confirm your password!-->
+<!--        }-->
+<!--        @if (control.errors?.['confirm']) {-->
+<!--          Two passwords that you enter is inconsistent!-->
+<!--        }-->
+<!--      </ng-template>-->
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label
       [nzSm]="6"
@@ -35,10 +42,13 @@
     >
       <span>Nickname</span>
     </nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+    <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input id="nickname" formControlName="nickname" />
+      <app-field-error  [form]="validateForm" fieldName="nickname" [fieldMessages]="fieldErrorMessages"/>
     </nz-form-control>
   </nz-form-item>
+
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
     <nz-form-control
@@ -58,12 +68,15 @@
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
+    <nz-form-control [nzSm]="14" [nzXs]="24">
       <input nz-input id="website" formControlName="website" placeholder="website" />
+      <app-field-error  [form]="validateForm" fieldName="website" [fieldMessages]="fieldErrorMessages"/>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label
       [nzSm]="6"
@@ -91,6 +104,7 @@
       </div>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item nz-row class="register-area">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
       <label nz-checkbox formControlName="agree">
@@ -101,9 +115,11 @@
       </label>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item nz-row class="register-area">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
       <button nz-button nzType="primary">Register</button>
     </nz-form-control>
   </nz-form-item>
+
 </form>

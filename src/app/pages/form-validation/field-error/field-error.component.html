@@ -1,0 +1,3 @@
+<ng-container *ngIf="shouldShowErrors()">
+  <div class="error-text" *ngFor="let error of listErrors()">{{ error }}</div>
+</ng-container>

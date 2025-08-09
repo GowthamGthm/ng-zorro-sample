@@ -1,0 +1,6 @@
+.error-text {
+  color: #ff4d4f; /* Ng-Zorro error red */
+  font-size: 12px;
+  line-height: 1.4;
+  padding-top: 5px;
+}

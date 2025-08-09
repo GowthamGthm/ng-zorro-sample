@@ -36,4 +36,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 `console.warn = () => {};`
 `}`
 
+##ng-zorro validation for nzErrorTip online
 
+`<nz-form-item>`
+    `<nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>`
+    `<nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="this.validateForm.get('email')?.errors?.['required'] ? 'Email is required!' :`
+    `this.validateForm.get('email')?.errors?.['email'] ? 'The input is not valid E-mail!' :`
+    `this.validateForm.get('email')?.errors?.['duplicate'] ? 'This email already exists!' :`
+    `''">`
+      `<input nz-input formControlName="email" id="email" />`
+    `</nz-form-control>`
+  `</nz-form-item>`

@@ -7,6 +7,7 @@ import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {FormsModule} from '@angular/forms';
+import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 
 interface ParentItemData {
   key: number;
@@ -30,7 +31,7 @@ interface ChildrenItemData {
 @Component({
   selector: 'app-nested-tables',
   standalone: true,
-  imports: [NzBadgeModule, NzDividerModule, NzDropDownModule, NzIconModule, NzTableModule, CommonModule, NzButtonComponent, FormsModule],
+  imports: [NzBadgeModule, NzDividerModule, NzDropDownModule, NzIconModule, NzTableModule, CommonModule, NzButtonComponent, FormsModule, NzPopconfirmDirective],
   templateUrl: './nested-tables.component.html',
   styleUrl: './nested-tables.component.css'
 })

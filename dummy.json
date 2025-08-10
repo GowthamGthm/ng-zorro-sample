@@ -1,0 +1,20 @@
+[
+  {
+    "userId": 1,
+    "userName": "ABCD",
+    "groupName": "GROUP-1",
+    "groupID" : 1234
+  },
+  {
+    "userId": 1,
+    "userName": "ABCD",
+    "groupName": "GROUP-2",
+    "groupID" : 2345
+  },
+  {
+    "userId": 2,
+    "userName": "DEFG",
+    "groupName": "Group-2",
+    "groupID" : 2345
+  }
+]

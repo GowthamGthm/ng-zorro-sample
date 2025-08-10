@@ -29,16 +29,8 @@ export class AppComponent {
       subMenu: [
         {
           title: 'Welcome',
-          link: '/welcome',
-        },
-        {
-          title: 'Monitor',
-          link: '',
-        },
-        {
-          title: 'Workplace',
-          link: '',
-        },
+          link: '/welcome'
+        }
       ],
     },
     {
@@ -46,23 +38,25 @@ export class AppComponent {
       icon: 'form',
       subMenu: [
         {
-          title: 'Basic Form',
-          link: '',
-        },
-        {
-          title: 'Ultra Form',
-          link: '',
-        },
-        {
           title: 'Form Validation with Template',
-          link: '/validation/reactive-with-template',
+          link: '/validation/reactive-with-template'
         },
         {
           title: 'Form Validation without Template',
-          link: '/validation/reactive-without-template',
+          link: '/validation/reactive-without-template'
         },
       ],
     },
+    {
+      title: 'Tables',
+      icon: 'tables',
+      subMenu: [
+        {
+          title: 'Nested Tables',
+          link: '/tables/nested'
+        }
+      ],
+    }
   ];
 
   constructor(private router: Router) {

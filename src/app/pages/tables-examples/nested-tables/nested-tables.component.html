@@ -1,59 +1,51 @@
-<input
-  nz-input
-  placeholder="Filter by Name"
-  [(ngModel)]="filterValue"
-  (ngModelChange)="filterByName($event)"
-  style="margin-bottom: 16px; width: 200px;"
-/>
+<nz-divider style="background: red" nzText=""></nz-divider>
 
+<div style="text-align: right;">
+  <input
+    nz-input
+    placeholder="Filter by Name"
+    [(ngModel)]="filterValue"
+    (ngModelChange)="filterByName($event)"
+    style="margin-bottom: 16px; width: 250px;"
+  />
+</div>
 
-<nz-table #nestedTable [nzData]="filteredListOFParentData" [nzPageSize]="10">
+<nz-table #nestedTable [nzData]="filteredUsersList" [nzPageSize]="10">
   <thead>
   <tr>
     <th></th>
-    <th>Name</th>
-    <th>Platform</th>
-    <th>Version</th>
-    <th>Upgraded</th>
-    <th>Creator</th>
-    <th>Date</th>
+    <th>ID</th>
+    <th>UserName</th>
   </tr>
   </thead>
   <tbody>
     @for (data of nestedTable.data; track data) {
       <tr>
         <td [(nzExpand)]="data.expand"></td>
+        <td>{{ data.id }}</td>
         <td>{{ data.name }}</td>
-        <td>{{ data.platform }}</td>
-        <td>{{ data.version }}</td>
-        <td>{{ data.upgradeNum }}</td>
-        <td>{{ data.creator }}</td>
-        <td>{{ data.createdAt }}</td>
       </tr>
       <tr [nzExpand]="data.expand">
-        <nz-table #innerTable [nzData]="data.childrenItemData" nzSize="middle" [nzShowPagination]="false">
+        <nz-table #innerTable [nzData]="data.groups" nzSize="middle" [nzShowPagination]="false">
           <thead>
           <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Status</th>
+            <th>ID</th>
+            <th>GroupName</th>
             <th>Action</th>
           </tr>
           </thead>
           <tbody>
             @for (group of innerTable.data; track group) {
               <tr>
-
+                <td>{{ group.id }}</td>
                 <td>{{ group.name }}</td>
-                <td>{{ group.upgradeNum }}</td>
-                <td>{{ group.date }}</td>
                 <td>
                   <button
                     nz-button
                     nzType="primary"
                     nz-popconfirm
                     nzPopconfirmTitle="Are you sure you want to delete this?"
-                    (nzOnConfirm)="deleteCLicked(data.key, group.key)"
+                    (nzOnConfirm)="deleteCLicked(data.id, group.id)"
                     >
                     Delete
                   </button>

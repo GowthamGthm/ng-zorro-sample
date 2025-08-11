@@ -9,23 +9,16 @@ import {NzButtonComponent} from 'ng-zorro-antd/button';
 import {FormsModule} from '@angular/forms';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
 
-interface ParentItemData {
-  key: number;
+interface User {
+  id: number;
   name: string;
-  platform: string;
-  version: string;
-  upgradeNum: number | string;
-  creator: string;
-  createdAt: string;
   expand: boolean;
-  childrenItemData: ChildrenItemData[]
+  groups: Group[]
 }
 
-interface ChildrenItemData {
-  key: number;
+interface Group {
+  id: number;
   name: string;
-  date: string;
-  upgradeNum: string;
 }
 
 @Component({
@@ -37,59 +30,63 @@ interface ChildrenItemData {
 })
 export class NestedTablesComponent implements OnInit {
 
-  listOfParentData: ParentItemData[] = [];
-  filteredListOFParentData: ParentItemData[] = [];
+  usersList: User[] = [];
+  filteredUsersList: User[] = [];
   filterValue: string = '';
 
   ngOnInit(): void {
-
-
-    for (let i = 0; i < 3; ++i) {
-
-      let childrenItemData: ChildrenItemData[] = [];
-
-      for (let j = 0; j < 3; ++j) {
-        childrenItemData.push({
-          key: j + 1,
-          date: '2014-12-24 23:12:00',
-          name: 'This is production name',
-          upgradeNum: 'Upgraded: 56'
-        });
-      }
-
-      this.listOfParentData.push({
-        key: i + 1,
-        name: 'Screen' + (i + 1),
-        platform: 'iOS',
-        version: '10.3.4.5654',
-        upgradeNum: 500,
-        creator: 'Jack',
-        createdAt: '2014-12-24 23:12:00',
+    this.usersList = [
+      {
+        id: 1,
+        name: "Alice Johnson",
         expand: false,
-        childrenItemData: childrenItemData
-      });
-    }
+        groups: [
+          {id: 101, name: "Admin"},
+          {id: 102, name: "Finance"}
+        ]
+      },
+      {
+        id: 2,
+        name: "Bob Smith",
+        expand: false,
+        groups: [
+          {id: 103, name: "Developers"},
+          {id: 104, name: "QA"}
+        ]
+      },
+      {
+        id: 3,
+        name: "Charlie Williams",
+        expand: false,
+        groups: [
+          {id: 105, name: "HR"}
+        ]
+      },
+      {
+        id: 4,
+        name: "Diana Roberts",
+        expand: false,
+        groups: []
+      }
+    ];
 
-    this.filteredListOFParentData = JSON.parse(JSON.stringify(this.listOfParentData));
-
+    this.filteredUsersList = JSON.parse(JSON.stringify(this.usersList));
 
   }
 
 
-  deleteCLicked(key: number, key2: number) {
-    console.log("clicked for delete: userID: " + key + ",  GroupID:  " + key2);
+  deleteCLicked(userId: number, groupId: number) {
+    console.log("clicked for delete: userID: " + userId + ",  GroupID:  " +groupId);
   }
 
   filterByName(filterValue: string) {
 
     if (!filterValue) {
-      this.filteredListOFParentData = JSON.parse(JSON.stringify(this.listOfParentData));
+      this.filteredUsersList = JSON.parse(JSON.stringify(this.usersList));
       return;
     }
 
-
-    this.filteredListOFParentData = this.listOfParentData.filter(ele => ele.name.toLowerCase().includes(filterValue.toLowerCase()));
-
+    this.filteredUsersList = this.usersList.filter(ele => ele.name.toLowerCase().includes(filterValue.toLowerCase()));
 
   }
 

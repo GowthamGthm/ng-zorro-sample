@@ -79,7 +79,7 @@ export class NestedTablesComponent implements OnInit {
     console.log("clicked for delete: userID: " + userId + ",  GroupID:  " +groupId);
   }
 
-  filterByName(filterValue: string) {
+  filterByUserName(filterValue: string) {
 
     if (!filterValue) {
       this.filteredUsersList = JSON.parse(JSON.stringify(this.usersList));

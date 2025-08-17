@@ -6,8 +6,10 @@ import {NzDropDownModule} from 'ng-zorro-antd/dropdown';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {FormsModule} from '@angular/forms';
 import {NzPopconfirmDirective} from 'ng-zorro-antd/popconfirm';
+
+
+import {FormsModule} from '@angular/forms';
 
 interface User {
   id: number;

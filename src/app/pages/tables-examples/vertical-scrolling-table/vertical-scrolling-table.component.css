@@ -1,0 +1,8 @@
+::ng-deep .ant-table-thead > tr > th,
+::ng-deep .ant-table-tbody > tr > td {
+  white-space: nowrap;      /* make sure long text doesn’t wrap */
+}
+
+::ng-deep .ant-table table {
+  table-layout: auto !important; /* let browser auto-size based on content */
+}

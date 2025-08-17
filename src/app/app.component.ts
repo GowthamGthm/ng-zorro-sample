@@ -54,6 +54,10 @@ export class AppComponent {
         {
           title: 'Nested Tables',
           link: '/tables/nested'
+        },
+        {
+          title: 'Vertical Scroll Table',
+          link: '/tables/v-scroll'
         }
       ],
     }

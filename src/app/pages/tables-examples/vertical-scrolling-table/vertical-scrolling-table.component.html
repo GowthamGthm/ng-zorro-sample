@@ -1,0 +1,51 @@
+<div style="text-align: right;">
+  <input
+    nz-input
+    placeholder="Filter by UserName"
+    [(ngModel)]="filterValue"
+    (ngModelChange)="filterByUserName($event)"
+    style="margin-bottom: 16px; width: 250px;"
+  />
+
+  <button
+    style="margin-left: 20px"
+    nz-button
+    nzType="primary"
+    (click)="exportToCSV()">
+    Export
+  </button>
+</div>
+
+<nz-table
+  #rowSelectionTable
+  nzShowPagination
+  [nzData]="listOfData"
+  nzTableLayout="auto"
+  [nzScroll]="{ x: 'max-content', y: '1000px' }">
+
+  <thead>
+  <tr>
+    @for (col of colDefinitions; track col.header + '-' + $index) {
+      <th
+        [nzShowSort]="true"
+        [nzSortFn]="sortFunctions[col.variable]">
+        {{ col.header }}
+      </th>
+    }
+  </tr>
+  </thead>
+
+  <tbody>
+    @for (data of rowSelectionTable.data; track data.id) {
+
+      <tr>
+
+        @for (col of colDefinitions; track col.variable + '-' + $index) {
+          <td>{{ data[col.variable] }}</td>
+        }
+      </tr>
+
+    }
+  </tbody>
+
+</nz-table>

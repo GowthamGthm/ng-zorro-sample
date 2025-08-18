@@ -45,55 +45,7 @@ export class VerticalScrollingTableComponent implements OnInit {
     {
       header: "Address",
       variable: "address"
-    },
-    // {
-    //   header: "Name 1",
-    //   variable: "name"
-    // },
-    // {
-    //   header: "Age 1",
-    //   variable: "age"
-    // },
-    // {
-    //   header: "Address 1",
-    //   variable: "address"
-    // },
-    // {
-    //   header: "Name 2",
-    //   variable: "name"
-    // },
-    // {
-    //   header: "Age 2",
-    //   variable: "age"
-    // },
-    // {
-    //   header: "Address 2",
-    //   variable: "address"
-    // },
-    // {
-    //   header: "Name 3",
-    //   variable: "name"
-    // },
-    // {
-    //   header: "Age 3",
-    //   variable: "age"
-    // },
-    // {
-    //   header: "Address 3",
-    //   variable: "address"
-    // },
-    // {
-    //   header: "Name 4",
-    //   variable: "name"
-    // },
-    // {
-    //   header: "Age 4",
-    //   variable: "age"
-    // },
-    // {
-    //   header: "Address 4",
-    //   variable: "address"
-    // }
+    }
   ];
 
 

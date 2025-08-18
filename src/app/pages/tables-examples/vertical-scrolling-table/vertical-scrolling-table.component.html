@@ -28,6 +28,7 @@
     @for (col of colDefinitions; track col.header + '-' + $index) {
       <th
         [nzShowSort]="true"
+        [nzSortDirections]="['ascend' , 'descend']"
         [nzSortFn]="sortFunctions[col.variable]">
         {{ col.header }}
       </th>

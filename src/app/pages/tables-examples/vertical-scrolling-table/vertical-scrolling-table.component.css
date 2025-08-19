@@ -3,6 +3,28 @@
   white-space: nowrap;      /* make sure long text doesn’t wrap */
 }
 
-::ng-deep .ant-table table {
-  table-layout: auto !important; /* let browser auto-size based on content */
+/* to disable the row and column not in the same line */
+:host ::ng-deep th,
+:host ::ng-deep td {
+  min-width: 120px;
+}
+
+/* to centre the row and header text */
+:host ::ng-deep th,
+:host ::ng-deep td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+
+/* try for the arrow icons */
+:host ::ng-deep .ant-table-column-sorter-up.active,
+:host ::ng-deep .ant-table-column-sorter-down.active {
+  color: #ff0000 !important;
+}
+
+:host ::ng-deep .ant-table-column-sorter-up,
+:host ::ng-deep .ant-table-column-sorter-down {
+  color: #000000;
 }

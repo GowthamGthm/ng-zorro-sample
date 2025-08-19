@@ -18,9 +18,12 @@
 
 <nz-table
   #rowSelectionTable
+  nzBordered
   nzShowPagination
+  nzShowSizeChanger
+  [nzLoading]="tableLoading"
   [nzData]="listOfData"
-  nzTableLayout="auto"
+  nzTableLayout="fixed"
   [nzScroll]="{ x: 'max-content', y: '1000px' }">
 
   <thead>
@@ -28,6 +31,7 @@
     @for (col of colDefinitions; track col.header + '-' + $index) {
       <th
         [nzShowSort]="true"
+        [nzSortDirections]="['ascend' , 'descend']"
         [nzSortFn]="sortFunctions[col.variable]">
         {{ col.header }}
       </th>

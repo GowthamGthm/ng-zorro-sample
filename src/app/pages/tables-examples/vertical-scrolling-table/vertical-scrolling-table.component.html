@@ -18,9 +18,12 @@
 
 <nz-table
   #rowSelectionTable
+  nzBordered
   nzShowPagination
+  nzShowSizeChanger
+  [nzLoading]="tableLoading"
   [nzData]="listOfData"
-  nzTableLayout="auto"
+  nzTableLayout="fixed"
   [nzScroll]="{ x: 'max-content', y: '1000px' }">
 
   <thead>

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {FormsModule} from '@angular/forms';
@@ -8,7 +8,18 @@ export interface Data {
   name: string;
   age: number;
   address: string;
-  disabled: boolean;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  street: string;
+  city: string;
+  country: string;
+  state: string;
+  marks: string;
+  total: string;
+  vendor: string;
+  supplier: string;
+  distributor: string;
 }
 
 type DataKey = keyof Data;
@@ -26,14 +37,16 @@ interface ColumnDefinition {
   styleUrl: './vertical-scrolling-table.component.css'
 })
 export class VerticalScrollingTableComponent implements OnInit {
-  listOfData: Data[] = [];
-  filteredListOfData: Data[] = [];
+  listOfData: Partial<Data>[] = [];
+  filteredListOfData: Partial<Data>[] = [];
+
+  tableLoading: boolean = false;
 
   sortFunctions: Record<DataKey, (a: Data, b: Data) => number> = {} as any;
 
-  filterValue : string = "";
+  filterValue: string = "";
 
-  colDefinitions : ColumnDefinition[] = [
+  colDefinitions: ColumnDefinition[] = [
     {
       header: "Name",
       variable: "name"
@@ -45,24 +58,97 @@ export class VerticalScrollingTableComponent implements OnInit {
     {
       header: "Address",
       variable: "address"
+    },
+    {
+      header: "First Name",
+      variable: "firstName"
+    },
+    {
+      header: "Last Name",
+      variable: "lastName"
+    },
+    {
+      header: "Middle Name",
+      variable: "middleName"
+    },
+    {
+      header: "Street",
+      variable: "street"
+    },
+    {
+      header: "City",
+      variable: "city"
+    },
+    {
+      header: "Country",
+      variable: "country"
+    },
+    {
+      header: "State",
+      variable: "state"
+    },
+    {
+      header: "Marks",
+      variable: "marks"
+    },
+    {
+      header: "Total",
+      variable: "total"
+    },
+    {
+      header: "Vendor",
+      variable: "vendor"
+    },
+    {
+      header: "Supplier",
+      variable: "supplier"
+    },
+    {
+      header: "Distributor",
+      variable: "distributor"
     }
   ];
 
 
-
   ngOnInit(): void {
-    this.listOfData = new Array(1000).fill(0)
-      .map((_, index) => ({
-      id: index + 1,
-      name: `Edward King ${index + 1}`,
-      age: (32 + index),
-      address: `London, Park Lane no. ${index + 1}`,
-      disabled: index % 2 === 0
-    }));
+    const variables: DataKey[] = this.colDefinitions.map(ele => ele.variable);
 
-    (['name', 'age', 'address'] as DataKey[]).forEach(key => {
+    (variables).forEach(key => {
       this.sortFunctions[key] = this.createSortFn(key);
     });
+
+    this.tableLoading = true;
+
+    setTimeout(() => {
+      this.loadTableData();
+    }, 10000);
+
+  }
+
+  private loadTableData() {
+
+
+    this.listOfData = new Array(1000).fill(0)
+      .map((_, index) => ({
+        id: index + 1,
+        name: `Edward King ${index + 1}`,
+        age: (32 + index),
+        address: `London, Park Lane no. ${index + 1}`,
+        distributor: "ABCDEFGHIJKLMNO",
+        firstName: "ABCDEFGHIJKLMNO",
+        lastName: "ABCDEFGHIJKLMNO",
+        city: "ABCDEFGHIJKLMNO",
+        country: "ABCDEFGHIJKLMNO",
+        street: "ABCDEFGHIJKLMNO",
+        marks: "0",
+        supplier: "ABCDEFGHIJKLMNO",
+        middleName: "ABCDEFGHIJKLMNO",
+        state: "ABCDEFGHIJKLMNO",
+        total: "ABCDEFGHIJKLMNO",
+        vendor: "A"
+
+      }));
+      this.tableLoading = false;
 
   }
 
@@ -100,7 +186,7 @@ export class VerticalScrollingTableComponent implements OnInit {
       if (!isNumA && isNumB) return 1;
 
       // Alphanumeric / string comparison (case-insensitive, numeric-aware)
-      return strA.localeCompare(strB, undefined, { numeric: true, sensitivity: 'base' });
+      return strA.localeCompare(strB, undefined, {numeric: true, sensitivity: 'base'});
     };
   }
 
@@ -121,7 +207,7 @@ export class VerticalScrollingTableComponent implements OnInit {
     const dateString = today.toISOString().split('T')[0];
     const filename = `table-data-${dateString}.csv`;
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
 
     // Programmatically trigger download without anchor link in DOM
     const url = URL.createObjectURL(blob);
@@ -135,10 +221,9 @@ export class VerticalScrollingTableComponent implements OnInit {
     URL.revokeObjectURL(url);
   }
 
-  filterByUserName(searchStr : string) {
+  filterByUserName(searchStr: string) {
 
   }
-
 
 
 }

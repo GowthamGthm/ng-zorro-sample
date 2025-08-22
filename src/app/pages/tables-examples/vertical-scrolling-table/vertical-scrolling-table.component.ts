@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzTableModule} from 'ng-zorro-antd/table';
 import {FormsModule} from '@angular/forms';
@@ -7,6 +7,7 @@ export interface Data {
   id: number;
   name: string;
   age: number;
+  accept: string;
   address: string;
   firstName: string;
   lastName: string;
@@ -52,7 +53,7 @@ export class VerticalScrollingTableComponent implements OnInit {
       variable: "name"
     },
     {
-      header: "Age",
+      header: "Ageeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
       variable: "age"
     },
     {
@@ -66,6 +67,10 @@ export class VerticalScrollingTableComponent implements OnInit {
     {
       header: "Last Name",
       variable: "lastName"
+    },
+    {
+      header: "Acceptttttttttttttttttttttttttttt",
+      variable: "accept"
     },
     {
       header: "Middle Name",
@@ -109,6 +114,9 @@ export class VerticalScrollingTableComponent implements OnInit {
     }
   ];
 
+  constructor(private cdr: ChangeDetectorRef) {
+  }
+
 
   ngOnInit(): void {
     const variables: DataKey[] = this.colDefinitions.map(ele => ele.variable);
@@ -121,12 +129,11 @@ export class VerticalScrollingTableComponent implements OnInit {
 
     setTimeout(() => {
       this.loadTableData();
-    }, 10000);
+    }, 2000);
 
   }
 
   private loadTableData() {
-
 
     this.listOfData = new Array(1000).fill(0)
       .map((_, index) => ({
@@ -134,21 +141,23 @@ export class VerticalScrollingTableComponent implements OnInit {
         name: `Edward King ${index + 1}`,
         age: (32 + index),
         address: `London, Park Lane no. ${index + 1}`,
-        distributor: "ABCDEFGHIJKLMNO",
+        distributor: "",
         firstName: "ABCDEFGHIJKLMNO",
         lastName: "ABCDEFGHIJKLMNO",
         city: "ABCDEFGHIJKLMNO",
         country: "ABCDEFGHIJKLMNO",
-        street: "ABCDEFGHIJKLMNO",
+        street: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         marks: "0",
         supplier: "ABCDEFGHIJKLMNO",
         middleName: "ABCDEFGHIJKLMNO",
         state: "ABCDEFGHIJKLMNO",
-        total: "ABCDEFGHIJKLMNO",
-        vendor: "A"
+        total: "0",
+        vendor: "A",
+        accept: 'Y'
 
       }));
-      this.tableLoading = false;
+    this.tableLoading = false;
+    this.cdr.detectChanges();
 
   }
 

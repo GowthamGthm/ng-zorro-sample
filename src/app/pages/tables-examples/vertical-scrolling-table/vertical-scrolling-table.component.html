@@ -22,9 +22,10 @@
   nzShowPagination
   nzShowSizeChanger
   [nzLoading]="tableLoading"
+  [nzSize]="'small'"
   [nzData]="listOfData"
-  nzTableLayout="fixed"
-  [nzScroll]="{ x: 'max-content', y: '1000px' }">
+  [nzTableLayout]="'auto'"
+  [nzScroll]="{ x: '100%', y: '800px' }">
 
   <thead>
   <tr>
@@ -32,6 +33,10 @@
       <th
         [nzShowSort]="true"
         [nzSortDirections]="['ascend' , 'descend']"
+        nzBreakWord
+        [nzWidth]="'170px'"
+        [nzAlign]="'center'"
+        [style.fontSize.px]="16"
         [nzSortFn]="sortFunctions[col.variable]">
         {{ col.header }}
       </th>
@@ -45,7 +50,7 @@
       <tr>
 
         @for (col of colDefinitions; track col.variable + '-' + $index) {
-          <td>{{ data[col.variable] }}</td>
+          <td [nzAlign]="'center'" nzBreakWord [style.fontSize.px]="14">{{ data[col.variable] }}</td>
         }
       </tr>
 

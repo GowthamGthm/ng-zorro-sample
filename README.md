@@ -47,3 +47,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
       `<input nz-input formControlName="email" id="email" />`
     `</nz-form-control>`
   `</nz-form-item>`
+
+
+
+ng-zorro - nz-table use below for the server side pagination
+<!-- NOTE:  nzFrontPagination = false to use server side pagination -->

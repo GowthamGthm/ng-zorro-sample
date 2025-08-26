@@ -16,11 +16,13 @@
   </button>
 </div>
 
+<!-- NOTE:  nzFrontPagination = false -->
 <nz-table
   #rowSelectionTable
   nzBordered
   nzShowPagination
   nzShowSizeChanger
+  [nzFrontPagination]="false"
   [nzLoading]="tableLoading"
   [nzSize]="'small'"
   [nzData]="listOfData"

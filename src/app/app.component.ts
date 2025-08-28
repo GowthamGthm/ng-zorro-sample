@@ -60,6 +60,16 @@ export class AppComponent {
           link: '/tables/v-scroll'
         }
       ],
+    },
+    {
+      title: 'Modals',
+      icon: 'tables',
+      subMenu: [
+        {
+          title: 'Dynamic Modals',
+          link: '/modals/dynamic'
+        }
+      ],
     }
   ];
 

@@ -1,0 +1,88 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Upload"
+  [nzWidth]="720"
+  (nzOnCancel)="isVisible=false"
+  [nzFooter]="null"
+>
+  <div *nzModalContent>
+    <form [formGroup]="uploadForm" (ngSubmit)="submitForm()">
+
+      <div formArrayName="documents">
+        <div *ngFor="let doc of documents.controls; let i = index" [formGroupName]="i" class="doc-block">
+
+          <nz-form-item>
+            <nz-row nzAlign="middle" nzGutter="8" style="width: 100%;">
+
+              <!-- Label -->
+              <nz-col [nzXs]="5" [nzSm]="5">
+                <nz-form-label nzNoColon>Document Name</nz-form-label>
+              </nz-col>
+
+              <!-- Input -->
+              <nz-col [nzXs]="18" [nzSm]="18">
+                <nz-form-control nzRequired nzErrorTip="Please select a file"
+                                 [nzValidateStatus]="getValidateStatus(getFileControl(i))"  >
+                  <input
+                    nz-input
+                    formControlName="fileName"
+                    placeholder="No file selected"
+                    readonly
+                  />
+                </nz-form-control>
+              </nz-col>
+
+              <!-- Delete Icon -->
+              <nz-col [nzXs]="1" [nzSm]="1">
+                <span
+                  nz-icon
+                  nzType="minus-circle-o"
+                  class="dynamic-delete-button"
+                  (click)="removeDocument(i)"
+                  style="cursor: pointer; color: red; font-size: 18px;"
+                ></span>
+              </nz-col>
+
+            </nz-row>
+          </nz-form-item>
+
+
+          <nz-upload
+            nzType="drag"
+            nzMultiple="false"
+            [nzFileList]="doc.value.fileList || []"
+            [nzAccept]="allowedTypes"
+            [nzBeforeUpload]="beforeUploadWrapper(i)"
+          >
+            <p class="ant-upload-drag-icon">
+              <i nz-icon nzType="inbox"></i>
+            </p>
+            <p class="ant-upload-text">Drag and Drop Files here</p>
+            <p class="ant-upload-hint">OR BROWSE</p>
+
+            <div class="formats">
+              Acceptable Formats:
+              <span><i nz-icon nzType="file-word" nzTheme="twotone"></i> Word</span>
+              <span><i nz-icon nzType="file-text" nzTheme="twotone"></i> Text</span>
+              <span><i nz-icon nzType="file-excel" nzTheme="twotone"></i> Excel</span>
+              <span><i nz-icon nzType="mail" nzTheme="twotone"></i> Outlook</span>
+              <span><i nz-icon nzType="file-pdf" nzTheme="twotone"></i> PDF</span>
+            </div>
+          </nz-upload>
+
+
+          <nz-divider/>
+        </div>
+      </div>
+
+      <a class="more-docs" (click)="addDocument()">+ More documents</a>
+
+      <div class="actions">
+        <button nz-button nzType="primary" type="submit">Upload</button>
+        <button nz-button nzType="default" (click)="isVisible=false">Cancel</button>
+      </div>
+    </form>
+  </div>
+</nz-modal>
+
+<button (click)="isVisible = !isVisible">Click Me</button>

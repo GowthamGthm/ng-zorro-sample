@@ -1,0 +1,26 @@
+.doc-block {
+  margin-bottom: 20px;
+}
+
+.formats {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #555;
+}
+
+.formats span {
+  margin-right: 12px;
+}
+
+.more-docs {
+  display: block;
+  margin: 15px 0;
+  color: #e91e63;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
